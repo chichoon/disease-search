@@ -2,6 +2,7 @@ import { SearchIcon } from './assets';
 import { useSearch } from './hooks/useSearch';
 
 import styles from './App.module.scss';
+import { SearchResultList } from './components/SearchResultList';
 
 const App = () => {
   const { input, handleChangeInput, searchResults } = useSearch();
@@ -18,6 +19,7 @@ const App = () => {
             <span>검색</span>
           </button>
         </div>
+        {searchResults.length > 0 && <SearchResultList searchResults={searchResults} />}
       </main>
     </div>
   );

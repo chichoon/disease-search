@@ -18,7 +18,10 @@ export function useSearch() {
 
   useEffect(() => {
     const timeoutValue = setTimeout(async () => {
-      if (input.length === 0) setSearchResults([]);
+      if (input.length === 0) {
+        setSearchResults([]);
+        return;
+      }
       await fetchSearchResults(input).then((data) => {
         setSearchResults(data);
       });
