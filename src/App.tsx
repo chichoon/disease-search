@@ -1,26 +1,27 @@
-import React from 'react';
+import { useState } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import { SearchIcon } from './assets';
 
-function App() {
+import styles from './App.module.scss';
+
+const App = () => {
+  const [input, setInput] = useState('');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className={styles.wrapper}>
+      <header className={styles.header}>
+        <h1>{`국내 모든 임상시험 검색하고\n온라인으로 참여하기`}</h1>
       </header>
+      <main>
+        <div className={styles.searchBarWrapper}>
+          <SearchIcon />
+          <input type='text' />
+          <button type='button' className={styles.searchButton}>
+            <span>검색</span>
+          </button>
+        </div>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
