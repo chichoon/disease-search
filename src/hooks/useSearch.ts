@@ -1,10 +1,18 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Sick } from '../types/sick';
+import { EXPIRE_TIME } from '../constants';
+
+const cacheData: { [key: string]: Sick } = {};
 
 async function fetchSearchResults(input: string) {
+  if (cacheData[input]) return cacheData[input];
   const res = await fetch(`${process.env.REACT_APP_SERVER_API}/sick?q=${input}`);
   const data = await res.json();
-  console.log(data);
+  cacheData[input] = data;
+  setTimeout(() => {
+    delete cacheData[input];
+  }, EXPIRE_TIME);
+  console.info('calling api');
   return data;
 }
 
@@ -14,6 +22,12 @@ export function useSearch() {
 
   function handleChangeInput(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);
+  }
+
+  async function handleClickSearch() {
+    await fetchSearchResults(input).then((data) => {
+      setSearchResults(data);
+    });
   }
 
   useEffect(() => {
@@ -32,5 +46,5 @@ export function useSearch() {
     };
   }, [input]);
 
-  return { input, searchResults, handleChangeInput };
+  return { input, searchResults, handleChangeInput, handleClickSearch };
 }
