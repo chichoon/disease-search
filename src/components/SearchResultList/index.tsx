@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchIcon } from '../../assets';
 import { Sick } from '../../types/sick';
 
@@ -10,6 +10,22 @@ interface Props {
 
 export const SearchResultList = ({ searchResults }: Props) => {
   const [selectedIdx, setSelectedIdx] = useState(0);
+
+  function handleMoveCursor(e: KeyboardEvent) {
+    if (e.key === 'ArrowUp') {
+      if (selectedIdx === 0) return;
+      setSelectedIdx((prev) => prev - 1);
+    } else if (e.key === 'ArrowDown') {
+      if (selectedIdx === searchResults.length - 1) return;
+      setSelectedIdx((prev) => prev + 1);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleMoveCursor);
+
+    return () => window.removeEventListener('keydown', handleMoveCursor);
+  }, [handleMoveCursor]);
 
   return (
     <ul className={styles.wrapper}>
