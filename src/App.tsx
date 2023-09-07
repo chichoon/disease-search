@@ -1,11 +1,10 @@
-import { useState } from 'react';
-import logo from './logo.svg';
 import { SearchIcon } from './assets';
+import { useSearch } from './hooks/useSearch';
 
 import styles from './App.module.scss';
 
 const App = () => {
-  const [input, setInput] = useState('');
+  const { input, handleChangeInput, searchResults } = useSearch();
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
@@ -14,7 +13,7 @@ const App = () => {
       <main>
         <div className={styles.searchBarWrapper}>
           <SearchIcon />
-          <input type='text' />
+          <input type='text' value={input} onChange={handleChangeInput} />
           <button type='button' className={styles.searchButton}>
             <span>검색</span>
           </button>
