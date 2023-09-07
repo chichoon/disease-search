@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Sick } from '../types/sick';
 import { EXPIRE_TIME } from '../constants';
 
@@ -24,7 +24,8 @@ export function useSearch() {
     setInput(event.target.value);
   }
 
-  async function handleClickSearch() {
+  async function handleClickSearch(e: FormEvent) {
+    e.preventDefault();
     await fetchSearchResults(input).then((data) => {
       setSearchResults(data);
     });
