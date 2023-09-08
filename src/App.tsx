@@ -1,8 +1,8 @@
-import { SearchIcon } from './assets';
 import { useSearch } from './hooks/useSearch';
-
-import styles from './App.module.scss';
 import { SearchResultList } from './components/SearchResultList';
+
+import { SearchIcon } from './assets';
+import styles from './App.module.scss';
 
 const App = () => {
   const { input, handleChangeInput, handleClickSearch, searchResults } = useSearch();
