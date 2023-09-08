@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Sick } from '../types/sick';
-import { EXPIRE_TIME } from '../constants';
+import { DEBOUNCE_TIME, EXPIRE_TIME } from '../constants';
 
 const cacheData: { [key: string]: Sick } = {};
 
@@ -40,7 +40,7 @@ export function useSearch() {
       await fetchSearchResults(input).then((data) => {
         setSearchResults(data);
       });
-    }, 1000);
+    }, DEBOUNCE_TIME);
 
     return () => {
       clearTimeout(timeoutValue);
