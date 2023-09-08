@@ -19,7 +19,7 @@ const App = () => {
             <span>검색</span>
           </button>
         </form>
-        {searchResults.length > 0 && <SearchResultList searchResults={searchResults} />}
+        <SearchResultList searchResults={searchResults} />
       </main>
     </div>
   );
