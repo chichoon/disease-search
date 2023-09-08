@@ -15,9 +15,11 @@ export const SearchResultList = ({ searchResults }: Props) => {
     if (e.key === 'ArrowUp') {
       if (selectedIdx === 0) return;
       setSelectedIdx((prev) => prev - 1);
+      document.getElementById('selected')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else if (e.key === 'ArrowDown') {
       if (selectedIdx === searchResults.length - 1) return;
       setSelectedIdx((prev) => prev + 1);
+      document.getElementById('selected')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 
@@ -36,6 +38,7 @@ export const SearchResultList = ({ searchResults }: Props) => {
             <li
               key={result.sickCd}
               className={`${selectedIdx === index ? styles.selected : ''} ${styles.innerElement}`}
+              id='selected'
             >
               <SearchIcon />
               <span>{result.sickNm}</span>
